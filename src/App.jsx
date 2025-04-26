@@ -1,23 +1,21 @@
 import React from 'react'
-import { Header } from './components/Header'
 import { Route, Routes } from 'react-router-dom'
-import { About, Accesories, Clothes, Home, Shoes } from './pages'
+
+import { Login } from './auth/pages/Login'
+import { ShopRouter } from './shop'
+import { AuthProvider } from './auth/context/AuthContext'
 
 
 export const App = () => {
   return (
-    <>
-      <Header/>
+    <AuthProvider>
 
       <Routes>
         {/* Aqui se agregan todas las rutas de la aplicacion */}
-        <Route path='/' element={<Home/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/accesories' element={<Accesories />} />
-        <Route path='/clothes' element={<Clothes />} />
-        <Route path='/shoes' element={<Shoes />} />
+        <Route path='/*' element={<ShopRouter/>}/>
+        <Route path='/login' element={<Login/>} />
 
       </Routes>
-    </>
+    </AuthProvider>
   )
 }
