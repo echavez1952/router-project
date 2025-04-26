@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const {
@@ -14,6 +15,8 @@ export const Login = () => {
   } = useForm();
 
   const { login } = useAuth();
+
+  const navigate = useNavigate();
 
   const onHandleSubmit = () => {
     // ejecutar mi funcion de login
@@ -30,8 +33,10 @@ export const Login = () => {
       });
       return;
     }
-
+    
+    navigate('/', { replace: true });
     reset();
+
   };
 
   return (

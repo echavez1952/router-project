@@ -1,7 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 export const Header = () => {
+
+  const {logout} = useAuth();
+
+  const onHandleLogOut = () => {
+    logout();
+  }
+
   return (
     <header
       style={{
@@ -22,7 +30,7 @@ export const Header = () => {
       </nav>
 
       <div>
-        <NavLink to="login">Log out</NavLink>
+        <NavLink to="/login" onClick={onHandleLogOut} replace={true}>Log out</NavLink>
       </div>
     </header>
   );

@@ -12,8 +12,8 @@ export const App = () => {
 
       <Routes>
         {/* Aqui se agregan todas las rutas de la aplicacion */}
-        <Route path='/*' element={<ShopRouter/>}/>
         <Route path='/login' element={<Login/>} />
+        <Route path='/*' element={<ShopRouter/>}/>
 
       </Routes>
     </AuthProvider>

@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
 
     if(foundUser){
         setUser(foundUser);
-        localStorage.setItem('user' , JSON.stringify(foundUser))
+        localStorage.setItem('user' , JSON.stringify(foundUser));
+
         return true
     }
 
