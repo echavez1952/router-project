@@ -13,8 +13,13 @@ export const AuthProvider = ({ children }) => {
     return session ? JSON.parse(session) : null;
   });
 
+  const [users, setUsers] = useState(() => {
+    const session = localStorage.getItem("users");
+    return session ? JSON.parse(session) : USERS;
+  });
+
   const login = (username, password) => {
-    const foundUser = USERS.find(
+    const foundUser = users.find(
         (u) => u.username === username && u.password === password
     );
 
@@ -35,8 +40,26 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   }
 
+
+  const registerContext = (username, password) => {
+
+    const userExists = users.some((u) => u.username === username);
+
+    if (userExists) {
+      return { success: false, message: "El usuario ya existe" };
+    }
+
+    const newUser = { username, password, role: "user" };
+    const updatedUsers = [...users, newUser];
+
+    setUsers(updatedUsers);
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+    return { success: true };
+  };
+
   return (
-    <AuthContext.Provider value={{user, login, logout}}>
+    <AuthContext.Provider value={{user, login, logout, registerContext}}>
         {children}
     </AuthContext.Provider>
   )

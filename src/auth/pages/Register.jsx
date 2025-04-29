@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { NavLink, useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Register = () => {
   const {
     register,
     handleSubmit,
@@ -14,21 +14,23 @@ export const Login = () => {
     clearErrors,
   } = useForm();
 
-  const { login } = useAuth();
   const navigate = useNavigate();
+  const {registerContext} = useAuth();
 
   const onHandleSubmit = () => {
-    const success = login(getValues("username"), getValues("password"));
+    const { username, password, confirmPassword } = getValues();
 
-    if (!success) {
-      setError("general", {
+    if (password !== confirmPassword) {
+      setError("confirmPassword", {
         type: "manual",
-        message: "Usuario o contraseña incorrectos",
+        message: "Las contraseñas no coinciden",
       });
       return;
     }
 
-    navigate("/", { replace: true });
+    registerContext(username, password);
+
+    navigate("/login", { replace: true });
     reset();
   };
 
@@ -38,7 +40,7 @@ export const Login = () => {
         onSubmit={handleSubmit(onHandleSubmit)}
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm"
       >
-        <h2 className="text-2xl font-bold text-center mb-6">Log In</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Crear cuenta</h2>
 
         <div className="mb-4">
           <input
@@ -61,12 +63,12 @@ export const Login = () => {
             placeholder="Password"
             {...register("password", {
               required: "Password requerido",
-              onChange: () => clearErrors("general"),
               pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                 message:
                   "La contraseña debe tener 8 caracteres, al menos 1 letra y al menos 1 número",
               },
+              onChange: () => clearErrors("confirmPassword"),
             })}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -75,22 +77,32 @@ export const Login = () => {
           )}
         </div>
 
-        {errors.general && (
-          <p className="text-red-600 text-center text-sm mb-4">{errors.general.message}</p>
-        )}
+        <div className="mb-4">
+          <input
+            type="password"
+            placeholder="Confirmar Password"
+            {...register("confirmPassword", {
+              required: "Confirmar contraseña",
+            })}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-600 text-sm mt-1">{errors.confirmPassword.message}</p>
+          )}
+        </div>
 
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
         >
-          Log In
+          Registrarse
         </button>
 
         <div className="text-center mt-4">
-          <span className="text-gray-600 text-sm">¿No tienes cuenta?</span>{" "}
-          <NavLink to="/register" className="text-blue-600 hover:underline text-sm">
-            Regístrate
-          </NavLink>
+          <span className="text-gray-600 text-sm">¿Ya tienes cuenta?</span>{" "}
+          <a href="/login" className="text-blue-600 hover:underline text-sm">
+            Inicia sesión
+          </a>
         </div>
       </form>
     </div>
