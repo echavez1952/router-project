@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-export const Item = ({ src, alt, price, category, gender }) => {
+export const Item = () => {
   const sizes = ["XS", "S", "M"];
-
   const [size, setSize] = useState("");
+
+  const location = useLocation();
+
+  console.log(location)
+  const { src, alt, price, category, gender } = location.state
 
   const onChangeSize = (e) => {
     setSize(e.target.value);

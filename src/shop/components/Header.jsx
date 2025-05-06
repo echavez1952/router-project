@@ -26,6 +26,16 @@ export const Header = () => {
           Inicio
         </NavLink>
         <NavLink
+          to="/accesories"
+          className={({ isActive }) =>
+            isActive
+              ? "font-semibold text-xl text-blue-900 transition-discrete"
+              : "text-gray-600 hover:text-red-600"
+          }
+        >
+          Accesorios
+        </NavLink>
+        <NavLink
           to="/clothes"
           className={({ isActive }) =>
             isActive
@@ -44,16 +54,6 @@ export const Header = () => {
           }
         >
           Zapatos
-        </NavLink>
-        <NavLink
-          to="/accesories"
-          className={({ isActive }) =>
-            isActive
-              ? "font-semibold text-xl text-blue-900 transition-discrete"
-              : "text-gray-600 hover:text-red-600"
-          }
-        >
-          Accesorios
         </NavLink>
         <NavLink
           to="/about"

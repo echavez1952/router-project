@@ -9,10 +9,8 @@ export const Home = () => {
 
   const navigate = useNavigate();
 
-  const onNavigate = (id) => {
-
-    console.log(id)
-    navigate(`/item/${id}`)
+  const onNavigate = (p) => {
+    navigate(`/item/${p.alt}`,{state: {...p}})
   }
 
   return (
@@ -23,7 +21,7 @@ export const Home = () => {
         <div 
           key={i} 
           className="flex flex-grow basis-[300px] max-w-[300px]"
-          onClick={() => onNavigate(i)}
+          onClick={() => onNavigate(p)}
         >
           <ProductCard {...p}/>
         </div>

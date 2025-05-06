@@ -1,15 +1,28 @@
 import React from "react";
 import { ProductCard } from "../components/ProductCard";
-import { getProducts } from "../helpers/getProducts";
-import { useFetch } from "../hooks/useFetch";
+import { getProductList } from "../helpers/Products";
+import { useNavigate } from "react-router-dom";
 
 export const Clothes = () => {
-  const { productos, isLoading, query, setQuery, getRequest } = useFetch("clothes");
+  const products = getProductList();
+  const clothes = products.filter((p) => p.category === "ropa");
+
+  const navigate = useNavigate();
+
+  const onNavigate = (p) => {
+    navigate(`/item/${p.alt}`, { state: { ...p } });
+  };
 
   return (
-    <div style={{ display: "flex" , flexWrap : 'wrap', gap: "1rem", padding: "2rem" }}>
-      {productos.map((p, i) => (
-        <ProductCard key={i} {...p} />
+    <div className="flex flex-wrap justify-center gap-6 p-4">
+      {clothes.map((p, i) => (
+        <div
+          key={i}
+          className="flex flex-grow basis-[300px] max-w-[300px]"
+          onClick={() => onNavigate(p)}
+        >
+          <ProductCard {...p} />
+        </div>
       ))}
     </div>
   );
