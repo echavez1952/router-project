@@ -38,10 +38,11 @@ export const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
         onSubmit={handleSubmit(onHandleSubmit)}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm"
+        className="bg-gray-200 border border-black-400 p-10 rounded-lg shadow-lg w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center mb-6">Crear cuenta</h2>
-
+        <h2 className="text-3xl font-semibold text-center mb-6">Crear cuenta</h2>
+ 
+      {/* Username */}
         <div className="mb-4">
           <input
             type="text"
@@ -50,13 +51,14 @@ export const Register = () => {
               required: "Username requerido",
               onChange: () => clearErrors("general"),
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border bg-white border-red-300 rounded-md text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.username && (
-            <p className="text-red-600 text-sm mt-1">{errors.username.message}</p>
+            <p className="text-red-600 text-xs italic mt-1">{errors.username.message}</p>
           )}
         </div>
 
+        {/* Password */}
         <div className="mb-4">
           <input
             type="password"
@@ -66,17 +68,18 @@ export const Register = () => {
               pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                 message:
-                  "La contraseña debe tener 8 caracteres, al menos 1 letra y al menos 1 número",
+                "La contraseña debe tener 8 caracteres, al menos 1 letra y al menos 1 número",
               },
               onChange: () => clearErrors("confirmPassword"),
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border bg-white border-red-300 rounded-md text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.password && (
-            <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
+            <p className="text-red-600 text-xs italic mt-1">{errors.password.message}</p>
           )}
         </div>
 
+        {/* Confirm Password */}
         <div className="mb-4">
           <input
             type="password"
@@ -84,16 +87,16 @@ export const Register = () => {
             {...register("confirmPassword", {
               required: "Confirmar contraseña",
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border bg-white border-red-300 rounded-md text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.confirmPassword && (
-            <p className="text-red-600 text-sm mt-1">{errors.confirmPassword.message}</p>
+            <p className="text-red-600 text-xs italic mt-1">{errors.confirmPassword.message}</p>
           )}
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+          className="w-full bg-blue-600  hover:bg-blue-800 text-white font-semibold px-6 py-2 rounded-lg border border-black transition-colors mt-4"
         >
           Registrarse
         </button>

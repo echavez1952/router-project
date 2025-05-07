@@ -14,7 +14,9 @@ export const Header = () => {
       <NavLink to="/">
         <h1 className="text-2xl font-bold text-blue-400">🛍️ Mi Tienda</h1>
       </NavLink>
+
       <nav className="flex gap-8">
+        
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -25,6 +27,7 @@ export const Header = () => {
         >
           Inicio
         </NavLink>
+
         <NavLink
           to="/accesories"
           className={({ isActive }) =>
@@ -35,6 +38,7 @@ export const Header = () => {
         >
           Accesorios
         </NavLink>
+
         <NavLink
           to="/clothes"
           className={({ isActive }) =>
@@ -45,6 +49,7 @@ export const Header = () => {
         >
           Ropa
         </NavLink>
+
         <NavLink
           to="/shoes"
           className={({ isActive }) =>
@@ -55,6 +60,7 @@ export const Header = () => {
         >
           Zapatos
         </NavLink>
+
         <NavLink
           to="/about"
           className={({ isActive }) =>
@@ -77,6 +83,7 @@ export const Header = () => {
           Log out
         </NavLink>
       </div>
+
     </header>
   );
 };
