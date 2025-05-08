@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 export const Header = () => {
+  
   const { logout } = useAuth();
 
   const onHandleLogOut = () => {
@@ -11,6 +12,7 @@ export const Header = () => {
 
   return (
     <header className="p-4 bg-white flex justify-between items-center shadow-md">
+      
       <NavLink to="/">
         <h1 className="text-2xl font-bold text-blue-400">🛍️ Mi Tienda</h1>
       </NavLink>
