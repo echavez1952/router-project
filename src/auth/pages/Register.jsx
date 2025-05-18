@@ -15,9 +15,11 @@ export const Register = () => {
   } = useForm();
 
   const navigate = useNavigate();
+  
   const {registerContext} = useAuth();
 
   const onHandleSubmit = () => {
+   // ejecutar mi funcion de register (en AuthContext)
     const { username, password, confirmPassword } = getValues();
 
     if (password !== confirmPassword) {

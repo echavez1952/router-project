@@ -8,3 +8,5 @@ export const useAuth = () => {
     return context
 
 }
+
+// {user: {…}, login: ƒ, logout: ƒ, registerContext: ƒ}

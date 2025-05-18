@@ -14,13 +14,17 @@ export const Login = () => {
     clearErrors
   } = useForm();
 
-  const { login } = useAuth();
-
   const navigate = useNavigate();
+  
+  const { login } = useAuth(); // Toma la función login de AuthContext
+  console.log(login); 
 
   const onHandleSubmit = () => {
-    // ejecutar mi funcion de login
+    
     console.log(getValues("username"), getValues("password"))
+    // edwin Echavez123
+    
+    // ejecutar mi funcion de login de AuthContext
     const success = login(getValues("username"), getValues("password"));
     //verificar si el usuario existe y las credenciales son correctas
 
@@ -33,6 +37,7 @@ export const Login = () => {
       return;
     }
 
+    //This will remove the current entry in the history stack, replacing it with a new one
     navigate('/', { replace: true });
     reset();
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
+import { Register } from './auth/pages/Register'
 import { Login } from './auth/pages/Login'
 import { ShopRouter } from './shop'
 import { AuthProvider } from './auth/context/AuthContext'
-import { Register } from './auth/pages/Register'
 import { PrivateRouter } from './router/PrivateRouter'
 import { PublicRouter } from './router/PublicRouter'
 

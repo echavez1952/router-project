@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 
+// const usuario = {username:"edwin", password:"Echavez123", role:"user"}
 const USERS = [
   { username: "admin", password: "1234567a", role: "admin" },
   { username: "sebas", password: "abcdef123", role: "user" },
@@ -8,13 +9,28 @@ const USERS = [
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+  // localStorage.setItem('user', JSON.stringify(usuario));
+
   const [user, setUser] = useState(() => {
     const session = localStorage.getItem("user");
+    console.log(session); // {"username":"edwin","password":"Echavez123","role":"user"}
+    console.log(JSON.parse(session)); // {username: 'edwin', password: 'Echavez123', role: 'user'}
+    const { username, password} = JSON.parse(session)
+    console.log(username); // edwin
+    console.log(password); // Echavez123
     return session ? JSON.parse(session) : null;
   });
 
   const [users, setUsers] = useState(() => {
     const session = localStorage.getItem("users");
+    console.log(session); 
+    // [{"username":"admin","password":"1234567a","role":"admin"},
+    // {"username":"sebas","password":"abcdef123","role":"user"},
+    // {"username":"edwin","password":"Echavez123","role":"user"}]
+    console.log(JSON.parse(session)); // [{…}, {…}, {…}]
+    // 0: {username: 'admin', password: '1234567a', role: 'admin'}
+    // 1: {username: 'sebas', password: 'abcdef123', role: 'user'}
+    // 2: {username: 'edwin', password: 'Echavez123', role: 'user'}
     return session ? JSON.parse(session) : USERS;
   });
 
@@ -29,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         setUser(foundUser);
         localStorage.setItem('user' , JSON.stringify(foundUser));
 
-        return true
+      return true
     }
 
     return false;
